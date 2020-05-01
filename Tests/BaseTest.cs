@@ -71,6 +71,15 @@ namespace AutomationTests.Tests
             Assert.That(isOk, Is.EqualTo(isPositive), $"Art filter {(isOk ? "existed" : "not existed")} " +
                 "but we expected opposite");
         }
+
+        [TestCase(true)]
+        public void CurrencySwitch(bool isPositive)
+        {
+            CurrencySwitch page = new CurrencySwitch(driver);
+            bool isOk = page.Goto(driver).isOk();
+            Assert.That(isOk, Is.EqualTo(isPositive), $"Currency switch {(isOk ? "existed" : "not existed")} " +
+                "but we expected opposite");
+        }
     }
     
 }

@@ -53,6 +53,24 @@ namespace AutomationTests.Tests
             Assert.That(isOk, Is.EqualTo(isPositive), $"Search is {(isOk ? "existed" : "not existed")} " +
                 "but we expected opposite");
         }
+
+        [TestCase(true)]
+        public void ContactUsForm(bool isPositive)
+        {
+            ContactUsCheck page = new ContactUsCheck(driver);
+            bool isOk = page.Goto(driver).isOk();
+            Assert.That(isOk, Is.EqualTo(isPositive), $"About page {(isOk ? "existed" : "not existed")} " +
+                "but we expected opposite");
+        }
+
+        [TestCase(true)]
+        public void ArtFilters(bool isPositive)
+        {
+            ArtFilter page = new ArtFilter(driver);
+            bool isOk = page.Goto(driver).isOk();
+            Assert.That(isOk, Is.EqualTo(isPositive), $"Art filter {(isOk ? "existed" : "not existed")} " +
+                "but we expected opposite");
+        }
     }
     
 }

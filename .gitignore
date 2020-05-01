@@ -1,4 +1,6 @@
 *.exe 
 obj/
 bin/
-
+*.sln
+packages
+.vs

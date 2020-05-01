@@ -43,6 +43,16 @@ namespace AutomationTests.Tests
                 Is.EqualTo(isPositive), $"Email was validated {(isDataOk ? "successfully" : "unseccessfully")} " +
                 "but we expected opposite");
         }
+
+        
+        //[TestCase(true)]
+        public void Filter(bool isPositive)
+        {
+            ClothesCheck page = new ClothesCheck(driver);
+            bool isOk = page.Goto().isFilterOk();
+            Assert.That(isOk, Is.EqualTo(isPositive), $"Search is {(isOk ? "existed" : "not existed")} " +
+                "but we expected opposite");
+        }
     }
     
 }

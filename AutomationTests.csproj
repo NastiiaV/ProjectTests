@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PageObject\ClothesCheck.cs" />
     <Compile Include="PageObject\PageObjectBase.cs" />
     <Compile Include="PageObject\SearchPage.cs" />
     <Compile Include="PageObject\Subscribe.cs" />

@@ -39,9 +39,6 @@ namespace AutomationTests.PageObject
                 isOk = wait.Until(x => x.
               FindElements(isEmailOkDiv).
               Any());
-                //Driver.FindElement(emailInput).SendKeys(password);
-                //Driver.FindElement(emailInput).SendKeys(Keys.Tab);
-                //Driver.FindElement(subscribeButton).Click();
             }
 
             catch (WebDriverTimeoutException)

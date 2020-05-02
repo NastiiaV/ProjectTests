@@ -13,6 +13,17 @@ namespace AutomationTests.PageObject
 
         }
 
+        public AccessoriesPage OpenAccessoriesPage()
+        {
+            string lang = Driver.FindElement(html).GetAttribute("lang");
+            if (lang == "uk")
+                Driver.FindElement(By.XPath(@"//a[@href='http://52.177.12.77:8080/uk/6-accessories']")).Click();
+            else
+                Driver.FindElement(By.XPath(@"//a[@href='http://52.177.12.77:8080/en/6-accessories']")).Click();
+
+            return new AccessoriesPage(Driver, lang);
+        }
+
         public OriginalPage SwitchLanguage()
         {
             string language = Driver.FindElement(html).GetAttribute("lang");

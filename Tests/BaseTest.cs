@@ -81,6 +81,7 @@ namespace AutomationTests.Tests
         }
 
         [Test]
+        [Order(0)]
         public void LocalizationTest()
         {
             OriginalPage originalPage = new OriginalPage(driver);
@@ -88,7 +89,23 @@ namespace AutomationTests.Tests
             Assert.That(isSwitched, Is.EqualTo(true), $"Language switch {(isSwitched ? "successfully" : "unsuccessfully")}");
 
             isSwitched = originalPage.SwitchLanguage().IsLangSwitched();
-            Assert.That(isSwitched, Is.EqualTo(true), $"Language switch {(isSwitched ? "successfully" : "unsuccessfully")}");
+            Assert.That(isSwitched, Is.EqualTo(true), 
+                $"Language switch {(isSwitched ? "successfully" : "unsuccessfully")}");
+        }
+
+        [Test]
+        [Order(1)]
+        public void FilterFunctionalTest()
+        {
+            OriginalPage originalPage = new OriginalPage(driver);
+            originalPage.SwitchLanguage();
+            AccessoriesPage accessoriesPage = 
+                originalPage.OpenAccessoriesPage()
+                    .PointHomeAccesorries()
+                    .PointStationery();
+            bool isFilterWork = accessoriesPage.IsFilterOn();
+            Assert.That(isFilterWork, Is.EqualTo(true), 
+                $"Filter is turned on {(isFilterWork ? "successfully" : "unsuccessfully")}");
         }
     } 
 }

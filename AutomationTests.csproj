@@ -60,10 +60,12 @@
     <Compile Include="PageObject\ClothesCheck.cs" />
     <Compile Include="PageObject\ContactUsCheck.cs" />
     <Compile Include="PageObject\CurrencySwitchCheck.cs" />
+    <Compile Include="PageObject\LogInPage.cs" />
     <Compile Include="PageObject\OriginalPage.cs" />
     <Compile Include="PageObject\PageObjectBase.cs" />
     <Compile Include="PageObject\SearchPage.cs" />
     <Compile Include="PageObject\ArtFilterCheck.cs" />
+    <Compile Include="PageObject\SignUpPage.cs" />
     <Compile Include="PageObject\Subscribe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\BaseTest.cs" />

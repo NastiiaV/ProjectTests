@@ -32,6 +32,7 @@ namespace AutomationTests.Tests
         }
 
         [TestCase(false, "t@gmail.com")]
+        [Order(3)]
         //[TestCase(true, "new@gmail.com")]
 
         public void SubscribeValid(bool isPositive, string email)
@@ -53,6 +54,7 @@ namespace AutomationTests.Tests
                 "but we expected opposite");
         }
 
+        [Order(4)]
         [TestCase(true)]
         public void ContactUsForm(bool isPositive)
         {
@@ -62,6 +64,7 @@ namespace AutomationTests.Tests
                 "but we expected opposite");
         }
 
+        [Order(5)]
         [TestCase(true)]
         public void ArtFilters(bool isPositive)
         {
@@ -71,6 +74,7 @@ namespace AutomationTests.Tests
                 "but we expected opposite");
         }
 
+        [Order(6)]
         [TestCase(true)]
         public void CurrencySwitch(bool isPositive)
         {
@@ -89,7 +93,7 @@ namespace AutomationTests.Tests
             Assert.That(isSwitched, Is.EqualTo(true), $"Language switch {(isSwitched ? "successfully" : "unsuccessfully")}");
 
             isSwitched = originalPage.SwitchLanguage().IsLangSwitched();
-            Assert.That(isSwitched, Is.EqualTo(true), 
+            Assert.That(isSwitched, Is.EqualTo(true),
                 $"Language switch {(isSwitched ? "successfully" : "unsuccessfully")}");
         }
 
@@ -99,13 +103,41 @@ namespace AutomationTests.Tests
         {
             OriginalPage originalPage = new OriginalPage(driver);
             originalPage.SwitchLanguage();
-            AccessoriesPage accessoriesPage = 
+            AccessoriesPage accessoriesPage =
                 originalPage.OpenAccessoriesPage()
                     .PointHomeAccesorries()
                     .PointStationery();
             bool isFilterWork = accessoriesPage.IsFilterOn();
-            Assert.That(isFilterWork, Is.EqualTo(true), 
+            Assert.That(isFilterWork, Is.EqualTo(true),
                 $"Filter is turned on {(isFilterWork ? "successfully" : "unsuccessfully")}");
+        }
+
+        [TestCase(false, SocialTitle.Male, "mvd", "kfek", "efkk@gmal.ck", "1234", "",
+            true, true, false)]
+        [TestCase(true, SocialTitle.Female, "mvd", "kfek", "yr@gmal.ck", "12345", "05/30/1999",   //AFTER EACH TIME CHANGE EMAIL ADDRESS TO CORRECT RESULT
+            true, true, true)]
+        [Order(2)]
+        public void SignUpTest(bool isPositive, SocialTitle socialTitle, string firstName,
+            string lastName, string email, string password, string birthDay,
+            bool taggedOffers, bool taggedNewsLetter, bool taggedAgree)
+        {
+            OriginalPage originalPage = new OriginalPage(driver);
+            LogInPage logInPage = originalPage.OpenLogInPage();
+            SignUpPage signUpPage = logInPage.ClickOnMakeAccount();
+            bool isAccountCreated = signUpPage.InputSocialTitle(socialTitle)
+                                    .InputFirstName(firstName)
+                                    .InputLastName(lastName)
+                                    .InputEmail(email)
+                                    .InputPassword(password)
+                                    .InputBirthDay(birthDay)
+                                    .TagOffers(taggedOffers)
+                                    .TagNewsLetter(taggedNewsLetter)
+                                    .TagAgree(taggedAgree)
+                                    .ClickSaveButton()
+                                    .IsAccountCreated();
+            System.Threading.Thread.Sleep(1000);
+            Assert.That(isAccountCreated, Is.EqualTo(isPositive),
+                $"Account is created {(isAccountCreated ? "successfully" : "unsuccessfully")}");
         }
     } 
 }

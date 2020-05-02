@@ -16,7 +16,6 @@ namespace AutomationTests.Tests
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = PageObjectBase.implicitWait;
             driver.Navigate().GoToUrl(PageObjectBase.url);
-
         }
 
         [OneTimeTearDown]
@@ -80,6 +79,16 @@ namespace AutomationTests.Tests
             Assert.That(isOk, Is.EqualTo(isPositive), $"Currency switch {(isOk ? "existed" : "not existed")} " +
                 "but we expected opposite");
         }
-    }
-    
+
+        [Test]
+        public void LocalizationTest()
+        {
+            OriginalPage originalPage = new OriginalPage(driver);
+            bool isSwitched = originalPage.SwitchLanguage().IsLangSwitched();
+            Assert.That(isSwitched, Is.EqualTo(true), $"Language switch {(isSwitched ? "successfully" : "unsuccessfully")}");
+
+            isSwitched = originalPage.SwitchLanguage().IsLangSwitched();
+            Assert.That(isSwitched, Is.EqualTo(true), $"Language switch {(isSwitched ? "successfully" : "unsuccessfully")}");
+        }
+    } 
 }

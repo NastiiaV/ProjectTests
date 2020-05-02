@@ -80,6 +80,19 @@ namespace AutomationTests.Tests
             Assert.That(isOk, Is.EqualTo(isPositive), $"Currency switch {(isOk ? "existed" : "not existed")} " +
                 "but we expected opposite");
         }
+
+
+        [TestCase("testemail123123@gmail.com", "testpass",true)]
+        public void PurchaseTest(string testEmail, string testPassword, bool isPositive)
+        {
+            Purchase purch = new Purchase(driver);
+            purch.SellectAccessory();
+            purch.SigningIn(testEmail, testPassword);
+            bool isDataOk = purch.MakingOrder().isPurchSuccess();
+            Assert.That(isDataOk,
+               Is.EqualTo(isPositive), $"Purchase was validated {(isDataOk ? "successfully" : "unseccessfully")} " +
+               "but we expected opposite");
+        }
     }
     
 }

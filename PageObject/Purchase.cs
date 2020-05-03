@@ -62,22 +62,6 @@ namespace AutomationTests.PageObject
             Driver.FindElement(password).SendKeys(text: testPassword);
             Driver.FindElement(loginingButt).Click();
 
-            //try
-            //{
-            //    Driver.FindElement(signOutButt).Click();
-            //}
-            //catch (NoSuchElementException)
-            //{
-            //    Driver.FindElement(signInButt).Click();
-            //    Driver.FindElement(email).SendKeys(text: testEmail);
-            //    Driver.FindElement(password).SendKeys(text: testPassword);
-            //    Driver.FindElement(loginingButt).Click();
-            //}
-            //Driver.FindElement(signInButt).Click();
-            //Driver.FindElement(email).SendKeys(text: testEmail);
-            //Driver.FindElement(password).SendKeys(text: testPassword);
-            //Driver.FindElement(loginingButt).Click();
-
             return this;
         }
 

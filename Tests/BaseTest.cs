@@ -22,8 +22,8 @@ namespace AutomationTests.Tests
         [OneTimeTearDown]
         public void OneTimeTearDown() => driver.Quit();
 
-        //[TestCase(true, "shirt")]
-        //[TestCase(false, "s")]
+        [TestCase(true, "shirt")]
+        [TestCase(false, "s")]
         public void Search(bool isPositive, string someSearch)
         {
             SearchPage searchPage = new SearchPage(driver);
@@ -44,7 +44,7 @@ namespace AutomationTests.Tests
                 "but we expected opposite");
         }
 
-        
+
         //[TestCase(true)]
         public void Filter(bool isPositive)
         {
@@ -86,11 +86,22 @@ namespace AutomationTests.Tests
         public void PurchaseTest(string testEmail, string testPassword, bool isPositive)
         {
             Purchase purch = new Purchase(driver);
-            purch.SellectAccessory();
             purch.SigningIn(testEmail, testPassword);
+            purch.SellectAccessory();
             bool isDataOk = purch.MakingOrder().isPurchSuccess();
             Assert.That(isDataOk,
                Is.EqualTo(isPositive), $"Purchase was validated {(isDataOk ? "successfully" : "unseccessfully")} " +
+               "but we expected opposite");
+        }
+
+           [TestCase("testemail123123@gmail.com", "testpass",true)]
+        public void AccountsViewTest(string testEmail, string testPassword, bool isPositive)
+        {
+            AccountsView acc = new AccountsView(driver);
+            acc.SigningIn(testEmail, testPassword);
+            bool isDataOk = acc.AccountsViewing().isAccountsView();
+            Assert.That(isDataOk,
+               Is.EqualTo(isPositive), $"Accounts list was validated {(isDataOk ? "successfully" : "unseccessfully")} " +
                "but we expected opposite");
         }
     }

@@ -44,7 +44,7 @@ namespace AutomationTests.Tests
                 "but we expected opposite");
         }
 
-        
+
         //[TestCase(true)]
         public void Filter(bool isPositive)
         {
@@ -138,6 +138,37 @@ namespace AutomationTests.Tests
             System.Threading.Thread.Sleep(1000);
             Assert.That(isAccountCreated, Is.EqualTo(isPositive),
                 $"Account is created {(isAccountCreated ? "successfully" : "unsuccessfully")}");
+        }
+
+        [TestCase("testemail123123@gmail.com", "testpass", true)]
+        public void PurchaseTest(string testEmail, string testPassword, bool isPositive)
+        {
+            Purchase purch = new Purchase(driver);
+            purch.SigningIn(testEmail, testPassword);
+            purch.SellectAccessory();
+            bool isDataOk = purch.MakingOrder().isPurchSuccess();
+            Assert.That(isDataOk,
+               Is.EqualTo(isPositive), $"Purchase was validated {(isDataOk ? "successfully" : "unseccessfully")} ");
+        }
+
+        [TestCase("testemail123123@gmail.com", "testpass", true)]
+        public void AccountsViewTest(string testEmail, string testPassword, bool isPositive)
+        {
+            AccountsView acc = new AccountsView(driver);
+            acc.SigningIn(testEmail, testPassword);
+            bool isDataOk = acc.AccountsViewing().isAccountsView();
+            Assert.That(isDataOk,
+               Is.EqualTo(isPositive), $"Accounts list was validated {(isDataOk ? "successfully" : "unseccessfully")} ");
+        }
+
+        [TestCase("testemail123123@gmail.com", "testpass", true)]
+        public void UserDataEditing(string testEmail, string testPassword, bool isPositive)
+        {
+            UserData user = new UserData(driver);
+            user.SigningIn(testEmail, testPassword);
+            bool isDataOk = user.DataUpdating(testPassword).isDataUpdated();
+            Assert.That(isDataOk,
+               Is.EqualTo(isPositive), $"User data was updated {(isDataOk ? "successfully" : "unseccessfully")} ");
         }
     } 
 }
